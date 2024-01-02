@@ -2,6 +2,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
+import { FlashLoading } from "../components/FlashLoading";
 
 export default function Home() {
   const [showFlash, setShowFlash] = useState(true);
@@ -9,14 +10,22 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowFlash(false);
-    }, 1500);
+    }, 15000);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <main className={styles.main}>
-      {showFlash ? null : (
+      <FlashLoading />
+    </main>
+  );
+
+  return (
+    <main className={styles.main}>
+      {showFlash ? (
+        <FlashLoading />
+      ) : (
         <>
           <div className={styles.description}>
             <p>
