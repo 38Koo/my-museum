@@ -12,5 +12,6 @@ export const FlashLoadingStyle = stylex.create({
     fontFamily: "Balsam",
     fontWeight: "bold",
     fontSize: "1.5rem",
+    color: "black",
   },
 });
