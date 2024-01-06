@@ -34,3 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# custom
+/public/fonts/
+next.svg
+vercel.svg
+favicon.ico

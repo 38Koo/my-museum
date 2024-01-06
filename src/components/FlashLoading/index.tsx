@@ -3,7 +3,7 @@ import * as stylex from "@stylexjs/stylex";
 import { useRef } from "react";
 import * as THREE from "three";
 import { Html } from "@react-three/drei";
-import { FlashLoadingStyle } from "./index.stylex";
+import { flashLoadingStyle } from "./index.stylex";
 
 const TorusMesh = () => {
   const ref = useRef<THREE.Mesh>(null);
@@ -23,15 +23,15 @@ const TorusMesh = () => {
 
 export const FlashLoading = () => {
   return (
-    <div {...stylex.props(FlashLoadingStyle.base)}>
+    <div {...stylex.props(flashLoadingStyle.base)}>
       <Canvas
         camera={{ position: [0, 0, 10] }}
-        {...stylex.props(FlashLoadingStyle.canvas)}
+        {...stylex.props(flashLoadingStyle.canvas)}
       >
         <directionalLight color={"0xffffff"} intensity={2} />
         <TorusMesh />
         <Html position={[-1, 0.2, 0]}>
-          <div {...stylex.props(FlashLoadingStyle.font)}>Loading...</div>
+          <div {...stylex.props(flashLoadingStyle.font)}>Loading...</div>
         </Html>
       </Canvas>
     </div>
