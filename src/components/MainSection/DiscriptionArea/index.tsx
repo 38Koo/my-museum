@@ -1,9 +1,9 @@
 import { stylex } from "@stylexjs/stylex";
 import { descriptionAreaStyle } from "./index.stylex";
-import { textSize } from "../../app/globalTokens.stylex";
+import { list, textSize } from "../../../app/globalTokens.stylex";
 import Image from "next/image";
 import { useContext } from "react";
-import { HoverContext } from "../../context/hoverContext";
+import { HoverContext } from "../../../context/hoverContext";
 
 export const DescriptionArea = () => {
   const { isHover } = useContext(HoverContext);
@@ -20,9 +20,9 @@ export const DescriptionArea = () => {
         <div {...stylex.props(descriptionAreaStyle.usedTechnology)}>
           <h5 {...stylex.props(textSize.h5)}>主な技術スタック</h5>
           <ul {...stylex.props(textSize.p)}>
-            <li>GraphQL</li>
-            <li>TypeScript</li>
-            <li>Chakra UI</li>
+            <li {...stylex.props(list.base)}>GraphQL</li>
+            <li {...stylex.props(list.base)}>TypeScript</li>
+            <li {...stylex.props(list.base)}>Chakra UI</li>
           </ul>
         </div>
         <div {...stylex.props(descriptionAreaStyle.images)}>

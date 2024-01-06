@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import { text } from "../../app/globalTokens.stylex";
+import { text } from "../../../app/globalTokens.stylex";
 
 export const editorAreaStyle = stylex.create({
   base: {

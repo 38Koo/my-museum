@@ -51,3 +51,9 @@ export const link = stylex.create({
     },
   },
 });
+
+export const list = stylex.create({
+  base: {
+    listStyle: "inside",
+  },
+});

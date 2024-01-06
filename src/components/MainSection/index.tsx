@@ -1,7 +1,7 @@
 import { stylex } from "@stylexjs/stylex";
-import { EditorArea } from "../EditorArea";
+import { EditorArea } from "./EditorArea";
 import { mainStyle } from "./index.stylex";
-import { DescriptionArea } from "../DiscriptionArea";
+import { DescriptionArea } from "./DiscriptionArea";
 import { HoverProvider } from "../../context/hoverContext";
 
 export const MainSection = () => {

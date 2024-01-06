@@ -1,10 +1,10 @@
 import { stylex } from "@stylexjs/stylex";
 import { editorAreaStyle } from "./index.stylex";
 import { useContext } from "react";
-import { HoverContext, HoverProvider } from "../../context/hoverContext";
+import { HoverContext } from "../../../context/hoverContext";
 
 export const EditorArea = () => {
-  const { isHover, setIsHover } = useContext(HoverContext);
+  const { setIsHover } = useContext(HoverContext);
 
   return (
     <div

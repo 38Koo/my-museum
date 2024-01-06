@@ -1,5 +1,5 @@
 import * as stylex from "@stylexjs/stylex";
-import { text } from "../../app/globalTokens.stylex";
+import { text } from "../../../app/globalTokens.stylex";
 
 export const descriptionAreaStyle = stylex.create({
   base: {
@@ -28,5 +28,8 @@ export const descriptionAreaStyle = stylex.create({
   },
   images: {
     marginLeft: "2rem",
+  },
+  a: {
+    paddingLeft: "10px",
   },
 });
