@@ -1,6 +1,6 @@
 import * as stylex from "@stylexjs/stylex";
 
-export const FlashLoadingStyle = stylex.create({
+export const flashLoadingStyle = stylex.create({
   base: {
     height: "100vh",
   },
