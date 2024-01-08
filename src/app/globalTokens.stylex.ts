@@ -12,6 +12,36 @@ export const text = stylex.defineVars({
   h6: "calc(16px + 2vmin)", // Heading 6
 });
 
+export const textSize = stylex.create({
+  sm: {
+    fontSize: text.sm,
+  },
+  p: {
+    fontSize: text.p,
+  },
+  lg: {
+    fontSize: text.lg,
+  },
+  h1: {
+    fontSize: text.h1,
+  },
+  h2: {
+    fontSize: text.h2,
+  },
+  h3: {
+    fontSize: text.h3,
+  },
+  h4: {
+    fontSize: text.h4,
+  },
+  h5: {
+    fontSize: text.h5,
+  },
+  h6: {
+    fontSize: text.h6,
+  },
+});
+
 export const link = stylex.create({
   base: {
     color: "#0000EE",
@@ -19,5 +49,11 @@ export const link = stylex.create({
       default: "none",
       ":hover": "underLine",
     },
+  },
+});
+
+export const list = stylex.create({
+  base: {
+    listStyle: "inside",
   },
 });
