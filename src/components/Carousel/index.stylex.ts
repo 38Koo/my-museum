@@ -21,9 +21,13 @@ export const carouselStyle = stylex.create({
     display: "flex",
     justifyContent: "center",
     borderRadius: "999px",
-    backgroundColor: "white",
+  },
+  activeButtonBackground: {
     background: "linear-gradient(to right, #EB6137, #F7B749)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
+  },
+  inactiveButtonBackground: {
+    background: "#CCCCCC",
   },
 });
