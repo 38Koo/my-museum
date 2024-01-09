@@ -1,12 +1,28 @@
 import { stylex } from "@stylexjs/stylex";
 import { descriptionAreaStyle } from "./index.stylex";
 import { list, textSize } from "../../../app/globalTokens.stylex";
-import Image from "next/image";
 import { useContext } from "react";
 import { HoverContext } from "../../../context/hoverContext";
+import { Carousel } from "../../Carousel";
 
 export const DescriptionArea = () => {
   const { isHover } = useContext(HoverContext);
+
+  // TODO: 関数作成
+  const getCarouselImages = [
+    {
+      src: "/images/next.svg",
+      alt: "alternative",
+    },
+    {
+      src: "/images/next.svg",
+      alt: "alternative",
+    },
+    {
+      src: "/images/next.svg",
+      alt: "alternative",
+    },
+  ];
 
   return (
     <div
@@ -19,15 +35,14 @@ export const DescriptionArea = () => {
       <div {...stylex.props(descriptionAreaStyle.layout)}>
         <div {...stylex.props(descriptionAreaStyle.usedTechnology)}>
           <h5 {...stylex.props(textSize.h5)}>主な技術スタック</h5>
-          <ul {...stylex.props(textSize.p)}>
-            <li {...stylex.props(list.base)}>GraphQL</li>
-            <li {...stylex.props(list.base)}>TypeScript</li>
-            <li {...stylex.props(list.base)}>Chakra UI</li>
+          <ul {...stylex.props(textSize.p, list.base)}>
+            <li>GraphQL</li>
+            <li>TypeScript</li>
+            <li>Chakra UI</li>
           </ul>
         </div>
-        <div {...stylex.props(descriptionAreaStyle.images)}>
-          <Image src={"/images/next.svg"} width={200} height={250} alt="a" />
-          <Image src={"/images/next.svg"} width={200} height={250} alt="a" />
+        <div {...stylex.props(descriptionAreaStyle.carousel)}>
+          <Carousel images={getCarouselImages} />
         </div>
       </div>
     </div>
