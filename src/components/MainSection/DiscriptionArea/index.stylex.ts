@@ -24,12 +24,12 @@ export const descriptionAreaStyle = stylex.create({
     marginTop: "3rem",
   },
   usedTechnology: {
-    width: "auto",
+    flexShrink: 0,
+    flexGrow: 0,
+    flexBasis: "310px",
+    // NOTE: 上記のショートハンド flex: "0 0 310px",
   },
-  images: {
-    marginLeft: "2rem",
-  },
-  a: {
-    paddingLeft: "10px",
+  carousel: {
+    flexGrow: 1,
   },
 });
