@@ -39,6 +39,8 @@ export const DescriptionArea = () => {
             <li>GraphQL</li>
             <li>TypeScript</li>
             <li>Chakra UI</li>
+            <li>Playwright</li>
+            <li>Firebase</li>
           </ul>
         </div>
         <div {...stylex.props(descriptionAreaStyle.carousel)}>

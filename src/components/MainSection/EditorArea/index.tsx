@@ -2,6 +2,7 @@ import { stylex } from "@stylexjs/stylex";
 import { editorAreaStyle } from "./index.stylex";
 import { useContext } from "react";
 import { HoverContext } from "../../../context/hoverContext";
+import { TodoApplicationEditor } from "../../EditorCode/TodoApplication";
 
 export const EditorArea = () => {
   const { setIsHover } = useContext(HoverContext);
@@ -13,8 +14,7 @@ export const EditorArea = () => {
         setIsHover((previous) => !previous);
       }}
     >
-      <div>Hello World!</div>
-      <div>{"// Description"}</div>
+      <TodoApplicationEditor />
     </div>
   );
 };
