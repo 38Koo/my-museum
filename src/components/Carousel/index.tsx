@@ -53,10 +53,8 @@ export const Carousel = ({ images }: CarouselProps) => {
         ←
       </button>
       <div ref={ref} {...stylex.props(carouselStyle.carousel)}>
-        {images.map((image) => {
-          return (
-            <CarouselItem key={image.src} src={image.src} alt={image.alt} />
-          );
+        {images.map((image, index) => {
+          return <CarouselItem key={index} src={image.src} alt={image.alt} />;
         })}
       </div>
       <button

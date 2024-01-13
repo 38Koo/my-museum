@@ -28,7 +28,7 @@ export const FlashLoading = () => {
         camera={{ position: [0, 0, 10] }}
         {...stylex.props(flashLoadingStyle.canvas)}
       >
-        <directionalLight color={"0xffffff"} intensity={2} />
+        <directionalLight color={0xffffff} intensity={2} />
         <TorusMesh />
         <Html position={[-1, 0.2, 0]}>
           <div {...stylex.props(flashLoadingStyle.font)}>Loading...</div>

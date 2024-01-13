@@ -1,34 +1,83 @@
 import { stylex } from "@stylexjs/stylex";
 import { editorCodeStyle } from "../index.stylex";
+import { useStore } from "zustand";
+import { editorSentenceStore } from "../../../store/editorSentence";
 
 export const TodoApplicationEditor = () => {
+  const { sentence } = useStore(editorSentenceStore);
+  const lines = sentence.split("\n");
+
+  const highlightWord = {
+    appTitle: "TODO Application",
+    point: ["Playwright", "Firebase"],
+    comment: "//",
+  };
+
+  // NOTE: highlightWordが複数行にまたがるパターンには対応できていない
   return (
     <pre>
       <ol {...stylex.props(editorCodeStyle.base)}>
-        <li>Hello World!</li>
-        <li {...stylex.props(editorCodeStyle.comment)}>{"// Description"}</li>
-        <li>フロントエンドエンジニアになって</li>
-        <li>日が浅い頃に作成したのがこの</li>
-        <li>
-          <span {...stylex.props(editorCodeStyle.highlightAppTitle)}>
-            TODO Application
-          </span>
-          です。
-        </li>
-        <li>技術スタックは当時実務で使用</li>
-        <li>していたものに寄せています。</li>
-        <li>作成後しばらくしてから、Zennで</li>
-        <li>
-          記事を書くために
-          <span {...stylex.props(editorCodeStyle.highlightWord)}>
-            Playwright
-          </span>
-        </li>
-        <li>を一部導入しました。認証には</li>
-        <li>
-          <span {...stylex.props(editorCodeStyle.highlightWord)}>Firebase</span>
-          を使用しています。
-        </li>
+        {lines.map((line, index) => {
+          const isLastLine = index === lines.length - 1;
+
+          const highLightWords = Object.values(highlightWord)
+            .flat()
+            .filter((word) => line.includes(word))
+            .sort((a, b) => line.indexOf(a) - line.indexOf(b));
+
+          // default
+          if (highLightWords.length === 0) {
+            return (
+              <li
+                key={index}
+                {...stylex.props(isLastLine ? editorCodeStyle.typing : null)}
+              >
+                {line}
+              </li>
+            );
+          }
+
+          // コメント行
+          if (highLightWords[0] === "//") {
+            return (
+              <li
+                key={index}
+                {...stylex.props(
+                  editorCodeStyle.comment,
+                  isLastLine ? editorCodeStyle.typing : null
+                )}
+              >
+                {line}
+              </li>
+            );
+          }
+
+          // ハイライト文字が入っている場合
+          const separateSentence = line.split(
+            new RegExp(highLightWords.join("|"))
+          );
+
+          return (
+            <li
+              key={index}
+              {...stylex.props(isLastLine ? editorCodeStyle.typing : null)}
+            >
+              {separateSentence.flatMap((item, index) => [
+                item,
+                <span
+                  key={index}
+                  {...stylex.props(
+                    highLightWords[index] === highlightWord.appTitle
+                      ? editorCodeStyle.highlightAppTitle
+                      : editorCodeStyle.highlightWord
+                  )}
+                >
+                  {highLightWords[index]}
+                </span>,
+              ])}
+            </li>
+          );
+        })}
       </ol>
     </pre>
   );
