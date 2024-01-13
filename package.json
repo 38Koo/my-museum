@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-three/drei": "^9.92.7",
+    "@react-three/drei": "9.17.0",
     "@stylexjs/babel-plugin": "^0.4.1",
     "@stylexjs/eslint-plugin": "^0.4.1",
     "@stylexjs/nextjs-plugin": "^0.4.1",
