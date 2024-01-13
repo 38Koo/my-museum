@@ -1,12 +1,16 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FlashLoading } from "../components/FlashLoading";
 import { HeadingSection } from "../components/HeadingSection";
 import * as stylex from "@stylexjs/stylex";
 import { MainSection } from "../components/MainSection";
+import { useStore } from "zustand";
+import { editorSentenceStore } from "../store/editorSentence";
 
 export default function Home() {
   const [showFlash, setShowFlash] = useState(true);
+  const ref = useRef<HTMLElement>(null);
+  const { update } = useStore(editorSentenceStore);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,11 +20,29 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  const onScroll = () => {
+    const scrollPosition = ref.current?.scrollTop ?? 0;
+    const numberOfChars = Math.floor(scrollPosition / 3);
+    update(
+      `// Description
+フロントエンドエンジニアになって
+日が浅い頃に作成したのがこの
+TODO Applicationです。
+技術スタックは当時実務で使用
+していたものに寄せています。
+作成後しばらくしてから、Zennで
+記事を書くためにPlaywright
+を一部導入しました。認証には
+Firebaseを使用しています。`.substring(0, numberOfChars)
+    );
+  };
+
   return showFlash ? (
     <FlashLoading />
   ) : (
-    <main {...stylex.props(style.base)}>
+    <main ref={ref} onScroll={() => onScroll()} {...stylex.props(style.base)}>
       <HeadingSection />
+      <MainSection />
       <MainSection />
     </main>
   );
@@ -32,5 +54,6 @@ const style = stylex.create({
     width: "100vw",
     backgroundColor: "white",
     color: "black",
+    overflow: "auto",
   },
 });

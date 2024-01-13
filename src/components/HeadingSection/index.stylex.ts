@@ -4,9 +4,6 @@ import { text } from "../../app/globalTokens.stylex";
 export const headingStyle = stylex.create({
   base: {
     height: "80%",
-    borderBottomWidth: "8px",
-    borderBottomStyle: "solid",
-    borderBottomColor: "gray",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
