@@ -31,5 +31,6 @@ const style = stylex.create({
     height: "100vh",
     width: "100vw",
     backgroundColor: "white",
+    color: "black",
   },
 });
