@@ -2,9 +2,14 @@ import { stylex } from "@stylexjs/stylex";
 import { editorAreaStyle } from "./index.stylex";
 import { useContext } from "react";
 import { HoverContext } from "../../../context/hoverContext";
-import { TodoApplicationEditor } from "../../EditorCode/TodoApplication";
+import { ApplicationNameType } from "../../../types/types";
+import { EditorCode } from "../../EditorCode";
 
-export const EditorArea = () => {
+export const EditorArea = ({
+  applicationName,
+}: {
+  applicationName: ApplicationNameType;
+}) => {
   const { setIsHover } = useContext(HoverContext);
 
   return (
@@ -14,7 +19,7 @@ export const EditorArea = () => {
         setIsHover((previous) => !previous);
       }}
     >
-      <TodoApplicationEditor />
+      <EditorCode applicationName={applicationName} />
     </div>
   );
 };

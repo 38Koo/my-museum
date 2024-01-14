@@ -6,6 +6,7 @@ import * as stylex from "@stylexjs/stylex";
 import { MainSection } from "../components/MainSection";
 import { useStore } from "zustand";
 import { editorSentenceStore } from "../store/editorSentence";
+import { APPLICATION_NAME } from "../const/applicationName";
 
 export default function Home() {
   const [showFlash, setShowFlash] = useState(true);
@@ -21,7 +22,8 @@ export default function Home() {
   }, []);
 
   const onScroll = () => {
-    const scrollPosition = ref.current?.scrollTop ?? 0;
+    if (!ref.current?.scrollTop) return;
+    const scrollPosition = ref.current?.scrollTop;
     const numberOfChars = Math.floor(scrollPosition / 3);
     update(
       `// Description
@@ -42,8 +44,9 @@ Firebaseを使用しています。`.substring(0, numberOfChars)
   ) : (
     <main ref={ref} onScroll={() => onScroll()} {...stylex.props(style.base)}>
       <HeadingSection />
-      <MainSection />
-      <MainSection />
+      {APPLICATION_NAME.map((app, index) => (
+        <MainSection key={index} applicationName={app} />
+      ))}
     </main>
   );
 }

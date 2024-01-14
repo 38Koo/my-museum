@@ -1,12 +1,20 @@
 import { stylex } from "@stylexjs/stylex";
-import { editorCodeStyle } from "../index.stylex";
 import { useStore } from "zustand";
-import { editorSentenceStore } from "../../../store/editorSentence";
+import { editorSentenceStore } from "../../store/editorSentence";
+import { editorCodeStyle } from "./index.stylex";
+import { ApplicationNameType } from "../../types/types";
 
-export const TodoApplicationEditor = () => {
-  const { sentence } = useStore(editorSentenceStore);
+export const EditorCode = ({
+  applicationName,
+}: {
+  applicationName: ApplicationNameType;
+}) => {
+  // TODO: 関数化
+  const store = editorSentenceStore;
+  const { sentence } = useStore(store);
   const lines = sentence.split("\n");
 
+  // TODO: 関数化
   const highlightWord = {
     appTitle: "TODO Application",
     point: ["Playwright", "Firebase"],
