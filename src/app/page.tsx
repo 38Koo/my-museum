@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import React, { Ref, useEffect, useRef, useState } from "react";
 import { FlashLoading } from "../components/FlashLoading";
 import { HeadingSection } from "../components/HeadingSection";
 import * as stylex from "@stylexjs/stylex";
@@ -10,8 +10,12 @@ import { APPLICATION_NAME } from "../const/applicationName";
 
 export default function Home() {
   const [showFlash, setShowFlash] = useState(true);
-  const ref = useRef<HTMLElement>(null);
-  const { update } = useStore(editorSentenceStore);
+  const rootRef = useRef<HTMLElement>(null);
+  const mainSectionRefArray = useRef<Ref<HTMLDivElement>[]>([]);
+  const { updateSentence } = useStore(editorSentenceStore);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const isIntersectionRef = useRef<boolean[]>([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -21,11 +25,54 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const mainSectionCurrent = mainSectionRefArray.current;
+    mainSectionRefArray.current = APPLICATION_NAME.map(() =>
+      React.createRef<HTMLDivElement>()
+    );
+
+    observerRef.current = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.getAttribute("data-id");
+        const index = APPLICATION_NAME.findIndex((app) => app === id);
+
+        isIntersectionRef.current[index] = entry.isIntersecting;
+      });
+    });
+
+    APPLICATION_NAME.map((_, index) => {
+      const currentElement = mainSectionCurrent[index];
+
+      if (
+        currentElement &&
+        "current" in currentElement &&
+        currentElement.current !== null
+      ) {
+        observerRef.current?.observe(currentElement.current);
+      }
+    });
+
+    return () => {
+      APPLICATION_NAME.map((_, index) => {
+        const currentElement = mainSectionCurrent[index];
+        if (
+          currentElement &&
+          "current" in currentElement &&
+          currentElement.current !== null
+        ) {
+          observerRef.current?.unobserve(currentElement.current);
+        }
+      });
+    };
+  }, [showFlash, mainSectionRefArray]);
+
   const onScroll = () => {
-    if (!ref.current?.scrollTop) return;
-    const scrollPosition = ref.current?.scrollTop;
-    const numberOfChars = Math.floor(scrollPosition / 3);
-    update(
+    if (!rootRef.current?.scrollTop) return;
+    setScrollPosition(rootRef.current.scrollTop);
+    const scrollPosition = rootRef.current?.scrollTop;
+    const numberOfChars = Math.floor(scrollPosition / 10);
+
+    updateSentence(
       `// Description
 フロントエンドエンジニアになって
 日が浅い頃に作成したのがこの
@@ -42,10 +89,20 @@ Firebaseを使用しています。`.substring(0, numberOfChars)
   return showFlash ? (
     <FlashLoading />
   ) : (
-    <main ref={ref} onScroll={() => onScroll()} {...stylex.props(style.base)}>
+    <main
+      ref={rootRef}
+      onScroll={() => onScroll()}
+      {...stylex.props(style.base)}
+    >
       <HeadingSection />
       {APPLICATION_NAME.map((app, index) => (
-        <MainSection key={index} applicationName={app} />
+        <MainSection
+          key={index}
+          appName={app}
+          ref={mainSectionRefArray.current[index]}
+          applicationName={app}
+          scrollPosition={scrollPosition}
+        />
       ))}
     </main>
   );

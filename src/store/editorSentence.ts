@@ -2,12 +2,12 @@ import { create } from "zustand";
 
 type EditorSentenceState = {
   sentence: string;
-  update: (updateSentence: string) => void;
+  updateSentence: (updateSentence: string) => void;
 };
 
 export const editorSentenceStore = create<EditorSentenceState>((set) => ({
   sentence: "",
-  update: (updateSentence) =>
+  updateSentence: (updateSentence) =>
     set(() => ({
       sentence: updateSentence,
     })),

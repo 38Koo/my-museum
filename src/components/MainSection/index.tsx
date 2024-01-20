@@ -4,18 +4,26 @@ import { mainStyle } from "./index.stylex";
 import { DescriptionArea } from "./DiscriptionArea";
 import { HoverProvider } from "../../context/hoverContext";
 import { ApplicationNameType } from "../../types/types";
+import { forwardRef } from "react";
 
-export const MainSection = ({
-  applicationName,
-}: {
+type MainSectionProps = {
   applicationName: ApplicationNameType;
-}) => {
-  return (
-    <HoverProvider>
-      <div {...stylex.props(mainStyle.base)}>
-        <EditorArea applicationName={applicationName} />
-        <DescriptionArea applicationName={applicationName} />
-      </div>
-    </HoverProvider>
-  );
+  scrollPosition: number;
+  appName: string;
 };
+
+export const MainSection = forwardRef<HTMLDivElement, MainSectionProps>(
+  function MainSection(
+    { applicationName, scrollPosition, appName }: MainSectionProps,
+    ref
+  ) {
+    return (
+      <HoverProvider>
+        <div ref={ref} data-id={appName} {...stylex.props(mainStyle.base)}>
+          <EditorArea applicationName={applicationName} />
+          <DescriptionArea applicationName={applicationName} />
+        </div>
+      </HoverProvider>
+    );
+  }
+);

@@ -4,11 +4,11 @@ import { editorSentenceStore } from "../../store/editorSentence";
 import { editorCodeStyle } from "./index.stylex";
 import { ApplicationNameType } from "../../types/types";
 
-export const EditorCode = ({
-  applicationName,
-}: {
+type EditorCodeProps = {
   applicationName: ApplicationNameType;
-}) => {
+};
+
+export const EditorCode = ({ applicationName }: EditorCodeProps) => {
   // TODO: 関数化
   const store = editorSentenceStore;
   const { sentence } = useStore(store);

@@ -6,11 +6,11 @@ import { HoverContext } from "../../../context/hoverContext";
 import { Carousel } from "../../Carousel";
 import { ApplicationNameType } from "../../../types/types";
 
-export const DescriptionArea = ({
-  applicationName,
-}: {
+type DescriptionAreaProps = {
   applicationName: ApplicationNameType;
-}) => {
+};
+
+export const DescriptionArea = ({ applicationName }: DescriptionAreaProps) => {
   const { isHover } = useContext(HoverContext);
 
   // TODO: 関数作成

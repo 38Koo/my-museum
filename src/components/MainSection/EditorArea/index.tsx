@@ -5,11 +5,11 @@ import { HoverContext } from "../../../context/hoverContext";
 import { ApplicationNameType } from "../../../types/types";
 import { EditorCode } from "../../EditorCode";
 
-export const EditorArea = ({
-  applicationName,
-}: {
+type EditorAreaProps = {
   applicationName: ApplicationNameType;
-}) => {
+};
+
+export const EditorArea = ({ applicationName }: EditorAreaProps) => {
   const { setIsHover } = useContext(HoverContext);
 
   return (
