@@ -1,13 +1,14 @@
 import { create } from "zustand";
+import { Descriptions, descriptions } from "../const/descriptions";
 
 type EditorSentenceState = {
-  sentence: string;
-  update: (updateSentence: string) => void;
+  sentence: Descriptions;
+  updateSentence: (updateSentence: Descriptions) => void;
 };
 
 export const editorSentenceStore = create<EditorSentenceState>((set) => ({
-  sentence: "",
-  update: (updateSentence) =>
+  sentence: descriptions,
+  updateSentence: (updateSentence) =>
     set(() => ({
       sentence: updateSentence,
     })),

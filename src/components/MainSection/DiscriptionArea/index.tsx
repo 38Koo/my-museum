@@ -4,8 +4,13 @@ import { list, textSize } from "../../../app/globalTokens.stylex";
 import { useContext } from "react";
 import { HoverContext } from "../../../context/hoverContext";
 import { Carousel } from "../../Carousel";
+import { ApplicationNameType } from "../../../types/types";
 
-export const DescriptionArea = () => {
+type DescriptionAreaProps = {
+  applicationName: ApplicationNameType;
+};
+
+export const DescriptionArea = ({ applicationName }: DescriptionAreaProps) => {
   const { isHover } = useContext(HoverContext);
 
   // TODO: 関数作成

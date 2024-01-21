@@ -1,17 +1,19 @@
 import { stylex } from "@stylexjs/stylex";
-import { editorCodeStyle } from "../index.stylex";
 import { useStore } from "zustand";
-import { editorSentenceStore } from "../../../store/editorSentence";
+import { editorSentenceStore } from "../../store/editorSentence";
+import { editorCodeStyle } from "./index.stylex";
+import { ApplicationNameType } from "../../types/types";
+import { highlightWords } from "../../const/highlightWords";
 
-export const TodoApplicationEditor = () => {
-  const { sentence } = useStore(editorSentenceStore);
-  const lines = sentence.split("\n");
+type EditorCodeProps = {
+  applicationName: ApplicationNameType;
+};
 
-  const highlightWord = {
-    appTitle: "TODO Application",
-    point: ["Playwright", "Firebase"],
-    comment: "//",
-  };
+export const EditorCode = ({ applicationName }: EditorCodeProps) => {
+  const store = editorSentenceStore;
+  const { sentence } = useStore(store);
+  const lines = sentence[applicationName].split("\n");
+  const highlightWord = highlightWords[applicationName];
 
   // NOTE: highlightWordが複数行にまたがるパターンには対応できていない
   return (
@@ -25,7 +27,7 @@ export const TodoApplicationEditor = () => {
             .filter((word) => line.includes(word))
             .sort((a, b) => line.indexOf(a) - line.indexOf(b));
 
-          // default
+          // 普通の文
           if (highLightWords.length === 0) {
             return (
               <li

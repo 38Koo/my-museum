@@ -1,16 +1,21 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import React, { Ref, useEffect, useRef, useState } from "react";
 import { FlashLoading } from "../components/FlashLoading";
 import { HeadingSection } from "../components/HeadingSection";
 import * as stylex from "@stylexjs/stylex";
 import { MainSection } from "../components/MainSection";
 import { useStore } from "zustand";
 import { editorSentenceStore } from "../store/editorSentence";
+import { APPLICATION_NAME } from "../const/applicationName";
+import { descriptions } from "../const/descriptions";
 
 export default function Home() {
   const [showFlash, setShowFlash] = useState(true);
-  const ref = useRef<HTMLElement>(null);
-  const { update } = useStore(editorSentenceStore);
+  const rootRef = useRef<HTMLElement>(null);
+  const mainSectionRefArray = useRef<Ref<HTMLDivElement>[]>([]);
+  const { updateSentence } = useStore(editorSentenceStore);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const isIntersectionRef = useRef<boolean[]>([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,30 +25,84 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  const onScroll = () => {
-    const scrollPosition = ref.current?.scrollTop ?? 0;
-    const numberOfChars = Math.floor(scrollPosition / 3);
-    update(
-      `// Description
-フロントエンドエンジニアになって
-日が浅い頃に作成したのがこの
-TODO Applicationです。
-技術スタックは当時実務で使用
-していたものに寄せています。
-作成後しばらくしてから、Zennで
-記事を書くためにPlaywright
-を一部導入しました。認証には
-Firebaseを使用しています。`.substring(0, numberOfChars)
+  useEffect(() => {
+    const mainSectionCurrent = mainSectionRefArray.current;
+    mainSectionRefArray.current = APPLICATION_NAME.map(() =>
+      React.createRef<HTMLDivElement>()
     );
+
+    observerRef.current = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.getAttribute("data-id");
+        const index = APPLICATION_NAME.findIndex((app) => app === id);
+
+        isIntersectionRef.current[index] = entry.isIntersecting;
+      });
+    });
+
+    APPLICATION_NAME.map((_, index) => {
+      const currentElement = mainSectionCurrent[index];
+
+      if (
+        currentElement &&
+        "current" in currentElement &&
+        currentElement.current !== null
+      ) {
+        observerRef.current?.observe(currentElement.current);
+      }
+    });
+
+    return () => {
+      APPLICATION_NAME.map((_, index) => {
+        const currentElement = mainSectionCurrent[index];
+        if (
+          currentElement &&
+          "current" in currentElement &&
+          currentElement.current !== null
+        ) {
+          observerRef.current?.unobserve(currentElement.current);
+        }
+      });
+    };
+  }, [showFlash, mainSectionRefArray]);
+
+  const onScroll = () => {
+    if (!rootRef.current?.scrollTop) return;
+    const scrollPosition = rootRef.current?.scrollTop;
+
+    const entries = APPLICATION_NAME.map((app, index) => {
+      if (isIntersectionRef.current[index]) {
+        return [
+          app,
+          descriptions[app].substring(
+            0,
+            Math.floor((scrollPosition - index * 350) / 3)
+          ),
+        ];
+      }
+      return [app, ""];
+    });
+    const updateSentences = Object.fromEntries(entries);
+
+    updateSentence(updateSentences);
   };
 
   return showFlash ? (
     <FlashLoading />
   ) : (
-    <main ref={ref} onScroll={() => onScroll()} {...stylex.props(style.base)}>
+    <main
+      ref={rootRef}
+      onScroll={() => onScroll()}
+      {...stylex.props(style.base)}
+    >
       <HeadingSection />
-      <MainSection />
-      <MainSection />
+      {APPLICATION_NAME.map((app, index) => (
+        <MainSection
+          key={index}
+          ref={mainSectionRefArray.current[index]}
+          applicationName={app}
+        />
+      ))}
     </main>
   );
 }
