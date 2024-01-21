@@ -7,6 +7,7 @@ import { MainSection } from "../components/MainSection";
 import { useStore } from "zustand";
 import { editorSentenceStore } from "../store/editorSentence";
 import { APPLICATION_NAME } from "../const/applicationName";
+import { descriptions } from "../const/descriptions";
 
 export default function Home() {
   const [showFlash, setShowFlash] = useState(true);
@@ -14,7 +15,6 @@ export default function Home() {
   const mainSectionRefArray = useRef<Ref<HTMLDivElement>[]>([]);
   const { updateSentence } = useStore(editorSentenceStore);
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
   const isIntersectionRef = useRef<boolean[]>([]);
 
   useEffect(() => {
@@ -68,22 +68,23 @@ export default function Home() {
 
   const onScroll = () => {
     if (!rootRef.current?.scrollTop) return;
-    setScrollPosition(rootRef.current.scrollTop);
     const scrollPosition = rootRef.current?.scrollTop;
-    const numberOfChars = Math.floor(scrollPosition / 10);
 
-    updateSentence(
-      `// Description
-フロントエンドエンジニアになって
-日が浅い頃に作成したのがこの
-TODO Applicationです。
-技術スタックは当時実務で使用
-していたものに寄せています。
-作成後しばらくしてから、Zennで
-記事を書くためにPlaywright
-を一部導入しました。認証には
-Firebaseを使用しています。`.substring(0, numberOfChars)
-    );
+    const entries = APPLICATION_NAME.map((app, index) => {
+      if (isIntersectionRef.current[index]) {
+        return [
+          app,
+          descriptions[app].substring(
+            0,
+            Math.floor((scrollPosition - index * 350) / 3)
+          ),
+        ];
+      }
+      return [app, ""];
+    });
+    const updateSentences = Object.fromEntries(entries);
+
+    updateSentence(updateSentences);
   };
 
   return showFlash ? (
@@ -98,10 +99,8 @@ Firebaseを使用しています。`.substring(0, numberOfChars)
       {APPLICATION_NAME.map((app, index) => (
         <MainSection
           key={index}
-          appName={app}
           ref={mainSectionRefArray.current[index]}
           applicationName={app}
-          scrollPosition={scrollPosition}
         />
       ))}
     </main>

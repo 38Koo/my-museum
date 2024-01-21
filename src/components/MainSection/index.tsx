@@ -8,18 +8,17 @@ import { forwardRef } from "react";
 
 type MainSectionProps = {
   applicationName: ApplicationNameType;
-  scrollPosition: number;
-  appName: string;
 };
 
 export const MainSection = forwardRef<HTMLDivElement, MainSectionProps>(
-  function MainSection(
-    { applicationName, scrollPosition, appName }: MainSectionProps,
-    ref
-  ) {
+  function MainSection({ applicationName }: MainSectionProps, ref) {
     return (
       <HoverProvider>
-        <div ref={ref} data-id={appName} {...stylex.props(mainStyle.base)}>
+        <div
+          ref={ref}
+          data-id={applicationName}
+          {...stylex.props(mainStyle.base)}
+        >
           <EditorArea applicationName={applicationName} />
           <DescriptionArea applicationName={applicationName} />
         </div>
