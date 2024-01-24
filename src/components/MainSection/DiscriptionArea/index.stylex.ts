@@ -10,7 +10,8 @@ export const descriptionAreaStyle = stylex.create({
     top: 0,
     right: 0,
     borderRadius: "30px 0 0 30px",
-    padding: "20px 50px",
+    paddingHorizontal: "50px",
+    paddingVertical: "20px",
   },
   widthWhenHover: {
     width: "60%",
