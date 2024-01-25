@@ -8,6 +8,7 @@ import { useStore } from "zustand";
 import { editorSentenceStore } from "../store/editorSentence";
 import { APPLICATION_NAME } from "../const/applicationName";
 import { descriptions } from "../const/descriptions";
+import { Footer } from "../components/Footer";
 
 export default function Home() {
   const [showFlash, setShowFlash] = useState(true);
@@ -103,6 +104,7 @@ export default function Home() {
           applicationName={app}
         />
       ))}
+      <Footer />
     </main>
   );
 }
