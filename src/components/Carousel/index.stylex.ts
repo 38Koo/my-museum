@@ -23,7 +23,7 @@ export const carouselStyle = stylex.create({
     borderRadius: "999px",
   },
   activeButtonBackground: {
-    background: "linear-gradient(to right, #EB6137, #F7B749)",
+    background: "linear-gradient(to right, #1D4B69, #6CB2D3)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
   },
