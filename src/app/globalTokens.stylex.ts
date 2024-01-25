@@ -57,3 +57,7 @@ export const list = stylex.create({
     listStyle: "inside",
   },
 });
+
+export const fonts = stylex.defineVars({
+  loadingFont: "Black Ops One",
+});
