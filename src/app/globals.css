@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -106,16 +108,4 @@ a {
   html {
     color-scheme: dark;
   }
-}
-
-@font-face {
-  font-family: "Balsam";
-  src: url("/fonts/balsam-font/BalsamRegular-rg7x7.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "Balsam";
-  src: url("/fonts/balsam-font/BalsamBold-MVapY.ttf") format("truetype");
-  font-weight: bold;
 }
