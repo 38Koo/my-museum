@@ -9,9 +9,12 @@ export const footerStyle = stylex.create({
     width: "100%",
     backgroundColor: "#1D4B69",
   },
-  icon: {
+  iconForNotFontAweSome: {
     height: "100px",
     width: "100px",
+  },
+  iconForFontAwesome: {
+    fontSize: "100px",
   },
   footerLayout: {
     display: "flex",
