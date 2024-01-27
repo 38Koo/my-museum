@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@react-three/drei": "9.17.0",
     "@stylexjs/babel-plugin": "^0.4.1",
     "@stylexjs/eslint-plugin": "^0.4.1",
@@ -26,6 +31,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/three": "^0.160.0",
+    "babel-plugin-inline-react-svg": "^2.0.2",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "three": "^0.160.0",

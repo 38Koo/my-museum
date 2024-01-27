@@ -6,6 +6,6 @@ export const mainStyle = stylex.create({
     position: "relative",
     borderTopWidth: "8px",
     borderTopStyle: "solid",
-    borderTopColor: "gray",
+    borderTopColor: "#D9E9E5",
   },
 });
