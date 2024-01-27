@@ -11,12 +11,12 @@ export const Footer = () => {
       <div {...stylex.props(footerStyle.iconLayout)}>
         <Link href={"https://github.com/38Koo"} target="_blank">
           <FontAwesomeIcon
+            {...stylex.props(footerStyle.iconForFontAwesome)}
             icon={faGithub}
-            {...stylex.props(footerStyle.icon)}
           />
         </Link>
         <Link href={"https://zenn.dev/38koo"} target="_blank">
-          <ZennLogo href={""} {...stylex.props(footerStyle.icon)} />
+          <ZennLogo {...stylex.props(footerStyle.iconForNotFontAweSome)} />
         </Link>
       </div>
     </div>
