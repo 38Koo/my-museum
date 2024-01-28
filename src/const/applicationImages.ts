@@ -10,30 +10,26 @@ export type ApplicationImages = {
 export const applicationImages = {
   TODO_Application: [
     {
-      src: "/images/next.svg",
-      alt: "alternative",
+      src: "/images/TODO_Application/top.png",
+      alt: "トップページ",
     },
     {
-      src: "/images/next.svg",
-      alt: "alternative",
+      src: "/images/TODO_Application/createTask.png",
+      alt: "タスク作成画面",
     },
     {
-      src: "/images/next.svg",
-      alt: "alternative",
+      src: "/images/TODO_Application/taskView.png",
+      alt: "タスク一覧画面",
     },
   ],
   share_diary: [
     {
-      src: "/images/next.svg",
-      alt: "alternative",
+      src: "/images/share_diary/diaryTop.png",
+      alt: "日記閲覧画面",
     },
     {
-      src: "/images/next.svg",
-      alt: "alternative",
-    },
-    {
-      src: "/images/next.svg",
-      alt: "alternative",
+      src: "/images/share_diary/signIn.png",
+      alt: "サインイン画面",
     },
   ],
 };
