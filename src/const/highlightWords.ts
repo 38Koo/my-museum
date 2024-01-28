@@ -15,9 +15,9 @@ export const highlightWords = {
     comment: "//",
   },
 
-  Share_Calender: {
-    appTitle: "Share_Calender",
-    point: ["カレンダー", "Firebase"],
+  share_diary: {
+    appTitle: "share_diary",
+    point: ["カレンダー", "Express", "Prisma", "msw"],
     comment: "//",
   },
 };

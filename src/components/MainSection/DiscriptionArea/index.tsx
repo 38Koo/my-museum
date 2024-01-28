@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { HoverContext } from "../../../context/hoverContext";
 import { Carousel } from "../../Carousel";
 import { ApplicationNameType } from "../../../types/types";
+import { usedTechnology } from "../../../const/usedTechnology";
+import { applicationImages } from "../../../const/applicationImages";
 
 type DescriptionAreaProps = {
   applicationName: ApplicationNameType;
@@ -13,21 +15,9 @@ type DescriptionAreaProps = {
 export const DescriptionArea = ({ applicationName }: DescriptionAreaProps) => {
   const { isHover } = useContext(HoverContext);
 
-  // TODO: 関数作成
-  const getCarouselImages = [
-    {
-      src: "/images/next.svg",
-      alt: "alternative",
-    },
-    {
-      src: "/images/next.svg",
-      alt: "alternative",
-    },
-    {
-      src: "/images/next.svg",
-      alt: "alternative",
-    },
-  ];
+  const technologyList = usedTechnology[applicationName];
+
+  const carouselImages = applicationImages[applicationName];
 
   return (
     <div
@@ -40,16 +30,16 @@ export const DescriptionArea = ({ applicationName }: DescriptionAreaProps) => {
       <div {...stylex.props(descriptionAreaStyle.layout)}>
         <div {...stylex.props(descriptionAreaStyle.usedTechnology)}>
           <h5 {...stylex.props(textSize.h5)}>主な技術スタック</h5>
-          <ul {...stylex.props(textSize.p, list.base)}>
-            <li>GraphQL</li>
-            <li>TypeScript</li>
-            <li>Chakra UI</li>
-            <li>Playwright</li>
-            <li>Firebase</li>
-          </ul>
+          {!!technologyList && (
+            <ul {...stylex.props(textSize.p, list.base)}>
+              {technologyList.map((technology) => {
+                return <li key={technology}>{technology}</li>;
+              })}
+            </ul>
+          )}
         </div>
         <div {...stylex.props(descriptionAreaStyle.carousel)}>
-          <Carousel images={getCarouselImages} />
+          <Carousel images={carouselImages} />
         </div>
       </div>
     </div>

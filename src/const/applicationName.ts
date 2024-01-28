@@ -1,1 +1,1 @@
-export const APPLICATION_NAME = ["TODO_Application", "Share_Calender"] as const;
+export const APPLICATION_NAME = ["TODO_Application", "share_diary"] as const;

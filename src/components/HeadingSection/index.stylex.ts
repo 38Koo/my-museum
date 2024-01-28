@@ -12,7 +12,7 @@ export const headingStyle = stylex.create({
   },
   header: {
     fontSize: text.h1,
-    background: "linear-gradient(to right, #EB6137, #F7B749, #E50011, orange)",
+    background: "linear-gradient(to right, #1D4B69, #6CB2D3, #94A1A9, #D9E9E5)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
   },
