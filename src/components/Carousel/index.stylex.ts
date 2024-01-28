@@ -11,7 +11,7 @@ export const carouselStyle = stylex.create({
     display: "flex",
     scrollSnapType: "x mandatory",
     overflowX: "hidden",
-    width: "300px",
+    width: "500px",
     margin: "0 30px",
   },
   button: {
