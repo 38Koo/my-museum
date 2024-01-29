@@ -4,7 +4,7 @@ import { text } from "../../../app/globalTokens.stylex";
 export const carouselItemStyle = stylex.create({
   base: {
     position: "relative",
-    width: "300px",
+    width: "500px",
     display: "flex",
     justifyContent: "center",
     flex: "none",

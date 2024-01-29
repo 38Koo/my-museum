@@ -7,31 +7,43 @@ type CarouselProps = {
   images: CarouselItemProps[];
 };
 
+const imageMaxWidth = 500;
+const imageScrollToRight = imageMaxWidth;
+const imageScrollTolLeft = -500;
+
 export const Carousel = ({ images }: CarouselProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isStartPosition, setIsStartPosition] = useState(true);
-  const [isLastPosition, setIsLastPosition] = useState(false);
+  const [isLastPosition, setIsLastPosition] = useState(
+    images.length > 1 ? false : true
+  );
+  const imageTotalWidth = imageMaxWidth * images.length;
 
-  const scrollSlide = (direction: 300 | -300) => {
+  const scrollSlide = (
+    direction: typeof imageScrollToRight | typeof imageScrollTolLeft
+  ) => {
     ref.current?.scrollBy({ left: direction, behavior: "smooth" });
 
     if (!ref.current) return;
 
     // FIXME: ここのロジックもっときれいにしたい
-    if (direction === -300 && ref.current?.scrollLeft === 300) {
+    if (
+      direction === -imageMaxWidth &&
+      ref.current?.scrollLeft === imageMaxWidth
+    ) {
       setIsStartPosition(true);
+      setIsLastPosition(false);
       return;
     }
 
     if (
-      direction === 300 &&
-      ref.current?.scrollWidth - ref.current?.scrollLeft ===
-        ref.current.clientWidth + 300
+      direction === imageMaxWidth &&
+      ref.current.scrollLeft === imageTotalWidth - imageMaxWidth * 2
     ) {
       setIsLastPosition(true);
+      setIsStartPosition(false);
       return;
     }
-
     setIsStartPosition(false);
     setIsLastPosition(false);
   };
@@ -42,7 +54,9 @@ export const Carousel = ({ images }: CarouselProps) => {
     <div {...stylex.props(carouselStyle.base)}>
       {/* TODO: アクセシビリティの観点から、buttonタグは連続した方が良さそう - フォーカスを連続させるため。 */}
       <button
-        onClick={isStartPosition ? () => {} : () => scrollSlide(-300)}
+        onClick={
+          isStartPosition ? () => {} : () => scrollSlide(imageScrollTolLeft)
+        }
         {...stylex.props(
           carouselStyle.button,
           isStartPosition
@@ -58,7 +72,7 @@ export const Carousel = ({ images }: CarouselProps) => {
         })}
       </div>
       <button
-        onClick={isLastPosition ? () => {} : () => scrollSlide(300)}
+        onClick={isLastPosition ? () => {} : () => scrollSlide(imageMaxWidth)}
         {...stylex.props(
           carouselStyle.button,
           isLastPosition

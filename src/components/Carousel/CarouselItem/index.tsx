@@ -10,7 +10,7 @@ export type CarouselItemProps = {
 export const CarouselItem = ({ src, alt }: CarouselItemProps) => {
   return (
     <div {...stylex.props(carouselItemStyle.base)}>
-      <Image src={src} width={200} height={250} alt={alt} />
+      <Image src={src} width={500} height={281} alt={alt} />
       <p {...stylex.props(carouselItemStyle.alt)}>{alt}</p>
     </div>
   );
