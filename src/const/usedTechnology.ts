@@ -13,4 +13,5 @@ export const usedTechnology = {
     "Firebase",
   ],
   share_diary: ["msw", "Tailwind", "Redux", "NextAuth.js"],
+  "my-museum": ["StyleX", "Three.js", "zustand"],
 };

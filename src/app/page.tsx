@@ -14,9 +14,10 @@ export default function Home() {
   const [showFlash, setShowFlash] = useState(true);
   const rootRef = useRef<HTMLElement>(null);
   const mainSectionRefArray = useRef<Ref<HTMLDivElement>[]>([]);
-  const { updateSentence } = useStore(editorSentenceStore);
+  const { updateSentence, sentence } = useStore(editorSentenceStore);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const isIntersectionRef = useRef<boolean[]>([]);
+  const componentHeight = 472;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -77,7 +78,7 @@ export default function Home() {
           app,
           descriptions[app].substring(
             0,
-            Math.floor((scrollPosition - index * 350) / 3)
+            Math.floor((scrollPosition - index * componentHeight) / 3)
           ),
         ];
       }

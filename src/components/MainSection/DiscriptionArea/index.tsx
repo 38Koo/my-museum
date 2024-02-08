@@ -26,7 +26,7 @@ export const DescriptionArea = ({ applicationName }: DescriptionAreaProps) => {
         isHover && descriptionAreaStyle.widthWhenHover
       )}
     >
-      <h2 {...stylex.props(descriptionAreaStyle.h2)}>TODO Application</h2>
+      <h2 {...stylex.props(descriptionAreaStyle.h2)}>{applicationName}</h2>
       <div {...stylex.props(descriptionAreaStyle.layout)}>
         <div {...stylex.props(descriptionAreaStyle.usedTechnology)}>
           <h5 {...stylex.props(textSize.h5)}>主な技術スタック</h5>
