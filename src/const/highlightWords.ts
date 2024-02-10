@@ -14,10 +14,14 @@ export const highlightWords = {
     point: ["Playwright", "Firebase"],
     comment: "//",
   },
-
   share_diary: {
     appTitle: "share_diary",
     point: ["カレンダー", "Express", "Prisma", "msw"],
+    comment: "//",
+  },
+  "my-museum": {
+    appTitle: "my-museum",
+    point: ["Three.js", "StyleX", "IntersectionObserver API"],
     comment: "//",
   },
 };

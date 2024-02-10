@@ -32,4 +32,8 @@ export const applicationImages = {
       alt: "サインイン画面",
     },
   ],
+  "my-museum": [
+    { src: "/images/my-museum/myMuseumTop.png", alt: "ヘッダーセクション" },
+    { src: "/images/my-museum/loadingThree.png", alt: "ローディング画面" },
+  ],
 };
